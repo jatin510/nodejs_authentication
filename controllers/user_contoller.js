@@ -24,6 +24,8 @@ module.exports.profile = (req, res) => {
   // });
   // console.log(req.user);
   // return res.render("user_profile",);
+  console.log(req.user.name);
+  req.flash("success", `Welcome ${req.user.name}`);
 
   User.findById(req.user.id, (err, user) => {
     return res.render("user_profile", {
@@ -35,6 +37,7 @@ module.exports.profile = (req, res) => {
 // create new user
 module.exports.create = async (req, res) => {
   if (req.body.password != req.body.confirm_password) {
+    req.flash("error", "password does not match");
     return res.redirect("back");
   }
 
@@ -42,7 +45,10 @@ module.exports.create = async (req, res) => {
     let user = await User.findOne({ email: req.body.email });
 
     // if email already registered
-    if (user) return res.redirect("back");
+    if (user) {
+      req.flash("error", "email already registered");
+      return res.redirect("back");
+    }
 
     // create new user
     const saltRounds = 10;
@@ -52,7 +58,10 @@ module.exports.create = async (req, res) => {
         email: req.body.email,
         password: hash,
         name: req.body.name,
-      }).then(() => res.redirect("/users/signin"));
+      }).then(() => {
+        req.flash("success", " user created");
+        res.redirect("/users/signin");
+      });
     });
   } catch (err) {
     console.log("error creating user", err);
@@ -61,13 +70,13 @@ module.exports.create = async (req, res) => {
 
 module.exports.createSession = (req, res) => {
   console.log("login successful");
-  // console.log("user info", req);
-  res.redirect("/");
+  req.flash("success", "Logged in Successfully");
+  res.redirect("/users/profile");
 };
 
 module.exports.destroySession = (req, res) => {
   req.logout();
-
+  req.flash("success", "logout successfull");
   return res.redirect("/");
 };
 
@@ -75,6 +84,7 @@ module.exports.updatePassword = async (req, res) => {
   try {
     if (req.body.password !== req.body.confirm_password) {
       // error flash message
+      req.flash("error", "password does not match");
       return res.redirect("back");
     }
     // req.user created at local passport strategy
@@ -83,20 +93,22 @@ module.exports.updatePassword = async (req, res) => {
 
     if (!user) {
       // flash message
+      req.flash("error", "user not registered");
       return res.redirect("back");
     }
-    console.log(req.body.password);
     // set new Password
     bcrypt.hash(req.body.password, 10).then((hash) => {
       user.password = hash;
       user.save().then(() => {
         console.log("updated password saved successfully");
+        req.flash("success", "user password updated successfully");
         return res.redirect("back");
       });
     });
   } catch (err) {
     // error updating password
     console.log("error updating password");
+    req.flash("error", "error updating password");
     return res.redirect("back");
   }
 };

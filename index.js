@@ -11,12 +11,18 @@ const passport = require("passport");
 const passortLocal = require("./config/passport_local_strategy");
 const passportGoogle = require("./config/passport-google-oauth2-stratergy");
 const MongoStore = require("connect-mongo")(session);
+//flash
+const flash = require("connect-flash");
+const customMware = require("./config/middleware");
 
 const app = express();
 
 // middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// static files
+app.use(express.static("./assets"));
 
 // session
 app.use(
@@ -51,6 +57,10 @@ app.set("layout extractStyles", true);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+
+// setup flash message
+app.use(flash());
+app.use(customMware.setFlash);
 
 // routes
 app.use("/", require("./routes"));
