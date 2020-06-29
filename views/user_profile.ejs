@@ -7,10 +7,11 @@
 
 <%if(user.id == user_profile.id){%>
 
-<h3>Name : <%user_profile.name%></h3>
-<h3>Email : <%user_profile.email%></h3>
+<h3>Name : <%=user_profile.name%></h3>
+<h3>Email : <%=user_profile.email%></h3>
+<h3>Password : <%=user_profile.password%></h3>
 
-<form action="/users/update-pasword" method="post">
+<form action="/users/update-password" method="post">
   <input type="password" name="password" placeholder="New Password" required />
   <input
     type="password"

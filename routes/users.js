@@ -9,7 +9,7 @@ router.get("/signin", userController.signIn);
 router.post("/create", userController.create);
 router.get("/profile", passport.checkAuthentication, userController.profile);
 router.get("/logout", userController.destroySession);
-router.get(
+router.post(
   "/update-password",
   passport.checkAuthentication,
   userController.updatePassword

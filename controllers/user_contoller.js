@@ -73,5 +73,30 @@ module.exports.destroySession = (req, res) => {
 
 module.exports.updatePassword = async (req, res) => {
   try {
-  } catch (err) {}
+    if (req.body.password !== req.body.confirm_password) {
+      // error flash message
+      return res.redirect("back");
+    }
+    // req.user created at local passport strategy
+    console.log("user data", req.user);
+    let user = await User.findOne({ email: req.user.email });
+
+    if (!user) {
+      // flash message
+      return res.redirect("back");
+    }
+    console.log(req.body.password);
+    // set new Password
+    bcrypt.hash(req.body.password, 10).then((hash) => {
+      user.password = hash;
+      user.save().then(() => {
+        console.log("updated password saved successfully");
+        return res.redirect("back");
+      });
+    });
+  } catch (err) {
+    // error updating password
+    console.log("error updating password");
+    return res.redirect("back");
+  }
 };
