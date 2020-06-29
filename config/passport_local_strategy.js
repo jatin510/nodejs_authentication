@@ -3,6 +3,9 @@ const LocalStrategy = require("passport-local");
 const User = require("../models/user.js");
 const bcrypt = require("bcrypt");
 
+const fetch = require("node-fetch");
+const { stringify } = require("querystring");
+
 // SOME CONFUSION
 passport.use(
   new LocalStrategy(
@@ -48,6 +51,35 @@ passport.deserializeUser((id, done) => {
 
 //check if the user is authenticated
 passport.checkAuthentication = function (req, res, next) {
+  // implementing captcha
+  // console.log("check authentication");
+
+  // if (!req.body.captcha) {
+  //   req.flash("error", "please select captcha");
+  //   return res.redirect("/users/signin");
+  // }
+
+  // const secretKey = "6LfWKqsZAAAAADA_kILq6TjzD5ivcykn0L0bIlaY";
+
+  // const query = stringify({
+  //   secret: secretKey,
+  //   response: req.body.captcha,
+  //   remoteip: req.connection.remoteAddress,
+  // });
+
+  // const verifyURL = `https://google.com/recaptcha/api/siteverify?${query}`;
+
+  // // Make a request to verifyURL
+  // const body = await fetch(verifyURL).then((res) => res.json());
+
+  // // if not successful
+  // if (body.success !== undefined && !body.success) {
+  //   req.flash("error", "failed captcha verification");
+  //   return res.redirect("/users/signin");
+  // }
+
+  /////////////////////
+
   // if the user is signed in, then pass on the request to the next function(controller's action)
   console.log("check if user is already signin");
   if (req.isAuthenticated()) {

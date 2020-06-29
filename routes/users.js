@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const userController = require("../controllers/user_contoller.js");
+const fetch = require("isomorphic-fetch");
 
 router.get("/profile", passport.checkAuthentication, userController.profile);
 router.get("/signup", userController.signUp);
@@ -34,4 +35,5 @@ router.get(
   passport.authenticate("google", { failureRedirect: "users/sign-in" }),
   userController.createSession
 );
+
 module.exports = router;

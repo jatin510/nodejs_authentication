@@ -18,9 +18,12 @@
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.17.1",
+    "isomorphic-fetch": "^2.2.1",
     "mongoose": "^5.9.20",
+    "node-fetch": "^2.6.0",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "querystring": "^0.2.0"
   }
 }

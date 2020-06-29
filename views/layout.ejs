@@ -9,10 +9,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
-
     <link rel="stylesheet" href="/css/layout.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/footer.css" />
+
+    <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
   </head>
   <body>
     <!-- header -->
@@ -23,6 +24,37 @@
 
     <!-- footer -->
     <%-include('_footer')-%>
+
+    <!--  recaptcha -->
+
+    <!-- <script>
+      document.onload = () => console.log("hello");
+      console.log("hello");
+      document
+        .getElementById("sign_in_form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          console.log("clicked");
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const captcha = document.querySelector("#g-recaptcha-response").value;
+          const captchahello = document.querySelector("#g-recaptcha").value
+            .value;
+
+          await fetch("/captcha", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+              name: name,
+              email: email,
+              captcha: captcha,
+            }),
+          }).then(() => console.log("create-session called from js"));
+
+          console.log("session called");
+        });
+    </script> -->
+
     <script>
       <% if(flash.success && flash.success.length >0){ %>
           new Noty({

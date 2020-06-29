@@ -65,11 +65,6 @@ app.use(customMware.setFlash);
 // routes
 app.use("/", require("./routes"));
 
-app.get("/", (req, res) => {
-  console.log("hello");
-  return res.send("hello");
-});
-
 app.listen(PORT, (err) => {
   if (err) console.log("Error starting server", err);
 
