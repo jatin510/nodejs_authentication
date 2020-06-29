@@ -1,7 +1,7 @@
 // import mongoose from "mongoose";
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/nodejs_authentication", {
+mongoose.connect("mongodb://localhost/nodejs_authentication_test", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

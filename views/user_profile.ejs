@@ -1,0 +1,25 @@
+<!-- created at local passport  : locals:user-->
+<!-- created at router : user_profile-->
+
+<h1>Profile Page</h1>
+
+<!-- check if the same user page is shown -->
+
+<%if(user.id == user_profile.id){%>
+
+<h3>Name : <%user_profile.name%></h3>
+<h3>Email : <%user_profile.email%></h3>
+
+<form action="/users/update-pasword" method="post">
+  <input type="password" name="password" placeholder="New Password" required />
+  <input
+    type="password"
+    name="confirm_password"
+    placeholder="Re-enter the Password"
+    required
+  />
+  <input type="submit" value="update" />
+</form>
+<%}else{%>
+<h2>You Trying to hack me</h2>
+<%}%>

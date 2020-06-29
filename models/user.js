@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var crypto = require("crypto");
 
 const userSchema = new mongoose.Schema(
   {
@@ -16,6 +17,7 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
   },
+
   { timestamps: true }
 );
 

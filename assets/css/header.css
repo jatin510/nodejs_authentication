@@ -1,0 +1,27 @@
+header {
+    background-color: #0080ff;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+header div {
+      padding: 8px;
+      font-size: 30px;
+      font-weight: bold;
+}
+header ul{
+    list-style-type: none;
+    font-size: 18   px;
+    margin: auto 0;
+           
+}
+header ul li{
+        margin-right: 10px;
+        display: inline-block; 
+    
+}
+header ul li a{
+          color: inherit;
+          text-decoration: none; 
+}
+  
